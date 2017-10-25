@@ -20,8 +20,8 @@ public class Main {
         scanInput.close();
 
         final SmpInputValidator validator = SmpInputValidatorFactory.fromLocale(locale);
-        final SmpDataTransformer transformer = new SmpDataTransformer(validator);
-        final String transformedInput = transformer.transform(input);
-        System.out.println(transformedInput);
+       // final SmpDataTransformer transformer = new SmpDataTransformer(validator);
+       // final String transformedInput = transformer.transform(input);
+       // System.out.println(transformedInput);
     }
 }
