@@ -21,19 +21,34 @@ public class SmpOutputWriterImplTest {
        doNothing().when(stream).println(anyString());
     }
 
-    //TODO
+
     @Test
     public void testPrint() throws Exception {
+        SmpOutputWriterImpl outputStream = new SmpOutputWriterImpl(stream);
+        String exmple =anyString();
+        outputStream.print(exmple);
+        Mockito.verify(stream).println(Mockito.eq(exmple));
+        Mockito.reset(stream);
     }
 
-    //TODO
+
     @Test
     public void testPrintEmpty() throws Exception {
+        SmpOutputWriterImpl outputStream = new SmpOutputWriterImpl(stream);
+        String exmple ="";
+        outputStream.print(exmple);
+        Mockito.verify(stream).println(Mockito.eq(exmple));
+        Mockito.reset(stream);
     }
 
-    //TODO
+
     @Test
     public void testPrintNull() throws Exception {
+        SmpOutputWriterImpl outputStream = new SmpOutputWriterImpl(stream);
+        String exmple =null;
+        outputStream.print(exmple);
+        Mockito.verify(stream).println(Mockito.eq(exmple));
+        Mockito.reset(stream);
     }
 
 }
