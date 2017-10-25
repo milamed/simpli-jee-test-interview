@@ -1,5 +1,6 @@
 package fr.simplifia.transform;
 
+import fr.simplifia.input.exception.InputException;
 import fr.simplifia.input.validator.SmpInputValidator;
 import fr.simplifia.transform.impl.SmpDataTransformFactory;
 import fr.simplifia.transform.impl.SmpEnglishDataTransformer;
@@ -19,34 +20,36 @@ public class SmpDataTransformerTest {
 
     private SmpInputValidator validator;
 
-    public SmpDataTransformerTest(){
+    public SmpDataTransformerTest() {
         validator = Mockito.mock(SmpInputValidator.class);
-        //TODO : mocking strategy
         doNothing().when(validator).validateInput(anyString());
     }
 
     @Test
     public void testTransformOk() throws Exception {
-        SmpDataTransformer transformer = SmpDataTransformFactory.fromLocale(validator, Locale.ENGLISH);
-        Mockito.verify(transformer).transform("test").equals("test"+" : Welcome to Simplifia!");
-        Mockito.reset(transformer);
-
-
+        SmpDataTransformer transformer = new SmpEnglishDataTransformer(validator);
+        assertEquals(transformer.transform("test"), "test : Welcome to Simplifia!");
     }
 
-    @Test
+    @Test(expectedExceptions = InputException.class)
     public void testTransformNotOk() throws Exception {
+        SmpDataTransformer transformer = new SmpEnglishDataTransformer(validator);
+        transformer.transform("ééé");
 
     }
 
 
     @Test
     public void testTransformEmpty() throws Exception {
+        SmpDataTransformer transformer = new SmpEnglishDataTransformer(validator);
+        assertEquals(transformer.transform(""), " : Welcome to Simplifia!");
 
     }
 
-    @Test
+    @Test(expectedExceptions = NullPointerException.class)
     public void testTransformNull() throws Exception {
+        SmpDataTransformer transformer = new SmpEnglishDataTransformer(validator);
+        transformer.transform(null);
 
     }
 

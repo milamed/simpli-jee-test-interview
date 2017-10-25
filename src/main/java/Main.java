@@ -21,7 +21,7 @@ public class Main {
         scanInput.close();
 
         final SmpInputValidator validator = SmpInputValidatorFactory.fromLocale(locale);
-        final SmpDataTransformer transformer = SmpDataTransformFactory.fromLocale(validator,locale);
+        final SmpDataTransformer transformer = SmpDataTransformFactory.fromLocale(validator, locale);
         final String transformedInput = transformer.transform(input);
         System.out.println(transformedInput);
     }
